@@ -37,7 +37,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const contactForm = document.querySelector("[data-contact-form]");
   if (contactForm) {
+<<<<<<< HEAD
     contactForm.addEventListener("submit", (event) => {
+=======
+    const formStartedAt = contactForm.querySelector("[data-form-started-at]");
+    const status = contactForm.querySelector("[data-form-status]");
+    const submitButton = contactForm.querySelector("[data-contact-submit]");
+
+    if (formStartedAt) formStartedAt.value = String(Date.now());
+
+    if (window.location.protocol === "file:") {
+      if (status) {
+        status.textContent = "Please open this page from a hosted site or local server.";
+        status.className = "text-sm font-bold text-red-700";
+      }
+      if (submitButton) submitButton.disabled = true;
+      return;
+    }
+
+    if (window.emailjs) {
+      emailjs.init("-E8da9VFDvlZf84DJ");
+    }
+
+    contactForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+>>>>>>> d41e930 (correct folder structures with logos)
       let valid = true;
       const fields = contactForm.querySelectorAll("[data-required]");
 
@@ -57,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
         field.setAttribute("aria-invalid", String(Boolean(message)));
       });
 
+<<<<<<< HEAD
       const status = contactForm.querySelector("[data-form-status]");
       if (status) {
         if (valid) {
@@ -69,6 +94,57 @@ document.addEventListener("DOMContentLoaded", () => {
       }
 
       if (!valid) event.preventDefault();
+=======
+      if (!valid) {
+        if (status) {
+          status.textContent = "Please correct the highlighted fields.";
+          status.className = "text-sm font-bold text-red-700";
+        }
+        return;
+      }
+
+      if (status) {
+        status.textContent = "Verifying security...";
+        status.className = "text-sm font-bold text-blue-700";
+      }
+
+      if (submitButton) submitButton.disabled = true;
+
+      let recaptchaToken = "";
+      try {
+        recaptchaToken = await grecaptcha.execute("6Lfw190sAAAAAHZHXJgJBByZXM8Axh5RrocdIhEH", { action: "contact" });
+      } catch (error) {
+        console.warn("reCAPTCHA not available");
+      }
+
+      const templateParams = {
+        name: contactForm.querySelector("#name")?.value.trim() || "",
+        email: contactForm.querySelector("#email")?.value.trim() || "",
+        subject: contactForm.querySelector("#subject")?.value.trim() || "",
+        message: contactForm.querySelector("#message")?.value.trim() || ""
+      };
+
+      try {
+        if (!window.emailjs) {
+          throw new Error("Email service is not available.");
+        }
+
+        await emailjs.send("service_h21d1ic", "template_7z467yp", templateParams);
+
+        if (status) {
+          status.textContent = "Your message has been successfully sent. Thank you!";
+          status.className = "text-sm font-bold text-green-700";
+        }
+        contactForm.reset();
+      } catch (error) {
+        if (status) {
+          status.textContent = "Unable to send your message. Please try again later.";
+          status.className = "text-sm font-bold text-red-700";
+        }
+      } finally {
+        if (submitButton) submitButton.disabled = false;
+      }
+>>>>>>> d41e930 (correct folder structures with logos)
     });
   }
 

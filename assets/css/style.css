@@ -44,6 +44,7 @@ textarea {
   height: auto;
 }
 
+<<<<<<< HEAD
 .brand-logo-text {
   display: inline-flex;
   align-items: baseline;
@@ -65,12 +66,30 @@ textarea {
 
 .nav-link {
   position: relative;
+=======
+
+.nav-link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+>>>>>>> d41e930 (correct folder structures with logos)
   color: #244256;
   font-weight: 700;
   font-size: 0.91rem;
   padding: 0.35rem 0;
 }
 
+<<<<<<< HEAD
+=======
+.nav-link svg,
+.footer-page-link svg {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+}
+
+>>>>>>> d41e930 (correct folder structures with logos)
 .nav-link::after {
   content: "";
   position: absolute;
@@ -271,6 +290,7 @@ textarea {
   background: linear-gradient(135deg, var(--cfi-navy), #0d4a61);
 }
 
+<<<<<<< HEAD
 .map-placeholder {
   min-height: 320px;
   border: 1px solid var(--cfi-line);
@@ -281,6 +301,8 @@ textarea {
   background-size: 42px 42px, 42px 42px, auto;
   border-radius: 8px;
 }
+=======
+>>>>>>> d41e930 (correct folder structures with logos)
 
 .map-card {
   border: 1px solid var(--cfi-line);
@@ -343,6 +365,28 @@ textarea {
   color: var(--cfi-white);
 }
 
+<<<<<<< HEAD
+=======
+.footer-page-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+}
+
+.footer-contact-line {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.footer-contact-line svg {
+  width: 1rem;
+  height: 1rem;
+  flex: 0 0 auto;
+}
+
+>>>>>>> d41e930 (correct folder structures with logos)
 @keyframes floatSoft {
   0%,
   100% {
@@ -377,6 +421,7 @@ textarea {
     width: 142px;
   }
 
+<<<<<<< HEAD
   .brand-logo-text {
     font-size: 1.55rem;
   }
@@ -385,6 +430,8 @@ textarea {
     display: none;
   }
 
+=======
+>>>>>>> d41e930 (correct folder structures with logos)
   .hero-shell {
     background: linear-gradient(150deg, rgba(8, 42, 61, 0.98) 0%, rgba(8, 42, 61, 0.9) 100%);
   }
