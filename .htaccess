@@ -1,0 +1,29 @@
+# Enable mod_rewrite
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+
+  # Remove .html extension from URLs (redirect to clean URLs)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^([a-zA-Z0-9_-]+)\.html$ /$1/ [R=301,L]
+
+  # Serve index.html for folder-like URLs
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^([a-zA-Z0-9_-]+)/$ $1.html [QSA,L]
+
+  # Prevent direct access to .html files (optional security)
+  RewriteCond %{THE_REQUEST} ^GET.*\.html
+  RewriteRule ^(.+)\.html$ /$1/ [R=301,L]
+</IfModule>
+
+# Browser caching for assets
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType application/javascript "access plus 1 month"
+</IfModule>
